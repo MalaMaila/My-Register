@@ -98,29 +98,39 @@
     }
 
     function completeSale() {
-      if (currentReceipt.length === 0) return;
-      var total = 0;
-      for (var i = 0; i < currentReceipt.length; i++) {
-        total += currentReceipt[i].price;
-      }
+  if (currentReceipt.length === 0) return;
+  
+  var total = 0;
+  var itemNames = [];
+  
+  for (var i = 0; i < currentReceipt.length; i++) {
+    total += currentReceipt[i].price;
+    itemNames.push(currentReceipt[i].name);
+  }
 
-      dailySales += total;
-      localStorage.setItem('dailySales', dailySales.toString());
-      document.getElementById('daily-total').innerText = dailySales.toFixed(2);
+  // Join item names into a single string (e.g., "Iced Americano, Roti")
+  var itemsString = itemNames.join(", ");
 
-      // Send sale to Google Sheets
-      if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ total: total })
-        });
-      }
+  dailySales += total;
+  localStorage.setItem('dailySales', dailySales.toString());
+  document.getElementById('daily-total').innerText = dailySales.toFixed(2);
 
-      window.print();
-      clearReceipt();
-    }
+  // Send sale details to Google Sheets
+  if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        items: itemsString, 
+        total: total 
+      })
+    });
+  }
+
+  window.print();
+  clearReceipt();
+}
   </script>
 </body>
 </html>
