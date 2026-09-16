@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mobile Register</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background: #f4f4f9; }
+    
+    /* Layout Container */
+    .app-container { display: flex; flex-direction: column; gap: 15px; }
+    
+    /* Menu Panel */
+    .menu-panel { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; }
+    .tile { flex: 1 1 calc(50% - 10px); min-height: 80px; background: #007aff; color: #fff; border-radius: 8px; text-align: center; cursor: pointer; padding: 15px 5px; }
+    .tile:active { background: #0051a8; }
+    .tile-title { font-size: 16px; font-weight: bold; }
+    .tile-price { font-size: 14px; margin-top: 5px; }
+
+    /* Receipt Panel */
+    .receipt-panel { background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 8px; width: 100%; }
+    .receipt-list { list-style: none; padding: 0; margin: 10px 0; max-height: 180px; overflow-y: auto; border-bottom: 1px solid #eee; }
+    .receipt-list li { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px; display: flex; justify-content: space-between; }
+    
+    .total-box { font-size: 20px; font-weight: bold; margin: 10px 0; }
+    .daily-box { background: #e5f9e5; padding: 10px; border-radius: 6px; margin: 10px 0; font-size: 16px; font-weight: bold; }
+    
+    .btn { display: block; width: 100%; padding: 14px; font-size: 16px; font-weight: bold; border: none; border-radius: 6px; margin-bottom: 8px; color: #fff; }
+    .btn-checkout { background-color: #34c759; }
+    .btn-clear { background-color: #ff3b30; }
+
+    /* Desktop & Tablet Side-by-Side View */
+    @media (min-width: 600px) {
+      .app-container { flex-direction: row; }
+      .menu-panel { flex: 1.5; }
+      .receipt-panel { flex: 1; }
+      .tile { flex: 1 1 calc(33% - 10px); }
+    }
+
+    @media print {
+      .menu-panel, .no-print { display: none !important; }
+      .receipt-panel { border: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Menu Grid -->
+    <div class="menu-panel no-print">
+      <div class="tile" onclick="addItem('Coffee', 3.50)">
+        <div class="tile-title">Coffee</div>
+        <div class="tile-price">$3.50</div>
+      </div>
+      <div class="tile" onclick="addItem('Tea', 3.00)">
+        <div class="tile-title">Tea</div>
+        <div class="tile-price">$3.00</div>
+      </div>
+      <div class="tile" onclick="addItem('Sandwich', 6.50)">
+        <div class="tile-title">Sandwich</div>
+        <div class="tile-price">$6.50</div>
+      </div>
+      <div class="tile" onclick="addItem('Pastry', 4.00)">
+        <div class="tile-title">Pastry</div>
+        <div class="tile-price">$4.00</div>
+      </div>
+    </div>
+
+    <!-- Receipt Panel -->
+    <div class="receipt-panel">
+      <h3 style="margin-top:0;">Active Order</h3>
+      <ul id="receipt-list" class="receipt-list"></ul>
+      
+      <div class="total-box">Total: $<span id="current-total">0.00</span></div>
+
+      <div class="no-print">
+        <button class="btn btn-checkout" onclick="completeSale()">Finalize Sale</button>
+        <button class="btn btn-clear" onclick="clearReceipt()">Clear Order</button>
+        
+        <div class="daily-box">
+          Today's Total: $<span id="daily-total">0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var currentReceipt = [];
+    var storedSales = localStorage.getItem('dailySales');
+    var dailySales = storedSales ? parseFloat(storedSales) : 0;
+
+    document.getElementById('daily-total').innerText = dailySales.toFixed(2);
+
+    function addItem(name, price) {
+      currentReceipt.push({ name: name, price: price });
+      renderReceipt();
+    }
+
+    function renderReceipt() {
+      var list = document.getElementById('receipt-list');
+      list.innerHTML = '';
+      var total = 0;
+
+      for (var i = 0; i < currentReceipt.length; i++) {
+        var item = currentReceipt[i];
+        var li = document.createElement('li');
+        li.innerHTML = '<span>' + item.name + '</span><span>$' + item.price.toFixed(2) + '</span>';
+        list.appendChild(li);
+        total += item.price;
+      }
+
+      document.getElementById('current-total').innerText = total.toFixed(2);
+    }
+
+    function clearReceipt() {
+      currentReceipt = [];
+      renderReceipt();
+    }
+
+    function completeSale() {
+      if (currentReceipt.length === 0) return;
+      
+      var total = 0;
+      for (var i = 0; i < currentReceipt.length; i++) {
+        total += currentReceipt[i].price;
+      }
+
+      dailySales += total;
+      localStorage.setItem('dailySales', dailySales.toString());
+      document.getElementById('daily-total').innerText = dailySales.toFixed(2);
+
+      // Triggers mobile print window or digital PDF save
+      window.print();
+      clearReceipt();
+    }
+  </script>
+</body>
+</html>
