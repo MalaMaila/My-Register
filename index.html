@@ -8,9 +8,10 @@
     * { box-sizing: border-box; }
     body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background: #f4f4f9; }
     
-    /* Header Icon Styling */
-    .app-header { text-align: center; margin-bottom: 12px; }
+    /* Header Icon & Banner Styling */
+    .app-header { text-align: center; margin-bottom: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .header-logo { max-height: 80px; width: auto; object-fit: contain; border-radius: 8px; }
+    .header-banner { width: 100%; max-width: 600px; height: auto; object-fit: contain; border-radius: 8px; }
 
     .app-container { display: flex; flex-direction: column; gap: 15px; }
     
@@ -55,9 +56,10 @@
 </head>
 <body>
 
-  <!-- Top Logo/Header -->
+  <!-- Top Logo/Header & Banner -->
   <div class="app-header no-print">
     <img src="hg.jpg" alt="Logo" class="header-logo">
+    <img src="hgb.jpg" alt="Banner" class="header-banner">
   </div>
 
   <div class="app-container">
