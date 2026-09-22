@@ -466,27 +466,32 @@
       }
       
       var total = 0;
-      var itemNames = [];
-      
+      var selectedDate = document.getElementById('sale-date').value;
+
+      // Build an array of individual items to send to Google Sheets
+      var itemsPayload = [];
       for (var i = 0; i < currentReceipt.length; i++) {
         total += currentReceipt[i].price;
-        itemNames.push(currentReceipt[i].name);
+        itemsPayload.push({
+          table: activeTable,
+          name: currentReceipt[i].name,
+          price: currentReceipt[i].price,
+          date: selectedDate
+        });
       }
-
-      var itemsString = "[" + activeTable + "] " + itemNames.join(", ");
-      var selectedDate = document.getElementById('sale-date').value;
 
       dailySales += total;
       localStorage.setItem('dailySales', dailySales.toString());
       document.getElementById('daily-total').innerText = dailySales.toFixed(2);
 
+      // Send payload to Google Apps Script
       if (GOOGLE_SCRIPT_URL) {
         fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ 
-            items: itemsString, 
+            orderItems: itemsPayload, 
             total: total,
             customDate: selectedDate
           })
