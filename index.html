@@ -467,24 +467,37 @@
       
       var total = 0;
       var selectedDate = document.getElementById('sale-date').value;
-      
-      // Get current local time string (e.g. "14:30:15")
-      var now = new Date();
-      var timeString = now.toTimeString().split(' ')[0];
-      
-      // Full ISO date-time string combining selected date with current time
-      var fullDateTime = selectedDate + " " + timeString;
 
-      // Build array of items
-      var itemsPayload = [];
+      // Group duplicate items by name
+      var groupedMap = {};
       for (var i = 0; i < currentReceipt.length; i++) {
-        total += currentReceipt[i].price;
+        var item = currentReceipt[i];
+        total += item.price;
+
+        if (groupedMap[item.name]) {
+          groupedMap[item.name].quantity += 1;
+          groupedMap[item.name].totalPrice += item.price;
+        } else {
+          groupedMap[item.name] = {
+            name: item.name,
+            unitPrice: item.price,
+            quantity: 1,
+            totalPrice: item.price
+          };
+        }
+      }
+
+      // Convert grouped map into array payload
+      var itemsPayload = [];
+      for (var key in groupedMap) {
+        var g = groupedMap[key];
         itemsPayload.push({
           table: activeTable,
-          name: currentReceipt[i].name,
-          price: currentReceipt[i].price,
-          date: fullDateTime,
-          time: timeString
+          name: g.name,
+          unitPrice: g.unitPrice,
+          quantity: g.quantity,
+          totalPrice: g.totalPrice,
+          date: selectedDate
         });
       }
 
@@ -492,7 +505,7 @@
       localStorage.setItem('dailySales', dailySales.toString());
       document.getElementById('daily-total').innerText = dailySales.toFixed(2);
 
-      // Send payload to Google Apps Script
+      // Send grouped payload to Google Apps Script
       if (GOOGLE_SCRIPT_URL) {
         fetch(GOOGLE_SCRIPT_URL, {
           method: "POST",
@@ -501,7 +514,7 @@
           body: JSON.stringify({ 
             orderItems: itemsPayload, 
             total: total,
-            customDate: fullDateTime
+            customDate: selectedDate
           })
         });
       }
