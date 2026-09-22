@@ -7,6 +7,11 @@
   <style>
     * { box-sizing: border-box; }
     body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background: #f4f4f9; }
+    
+    /* Header Icon Styling */
+    .app-header { text-align: center; margin-bottom: 12px; }
+    .header-logo { max-height: 80px; width: auto; object-fit: contain; border-radius: 8px; }
+
     .app-container { display: flex; flex-direction: column; gap: 15px; }
     
     .menu-panel { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; }
@@ -43,12 +48,17 @@
       .tile { flex: 1 1 calc(33% - 10px); }
     }
     @media print {
-      .menu-panel, .no-print, .remove-btn, .table-section { display: none !important; }
+      .menu-panel, .no-print, .remove-btn, .table-section, .app-header { display: none !important; }
       .receipt-panel { border: none; width: 100%; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Top Logo/Header -->
+  <div class="app-header no-print">
+    <img src="hg.jpg" alt="Logo" class="header-logo">
+  </div>
 
   <div class="app-container">
     
