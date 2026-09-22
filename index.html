@@ -51,11 +51,6 @@
 
   <div class="app-container">
     <div class="menu-panel no-print">
-      <!-- Search Bar -->
-      <div style="width: 100%; margin-bottom: 10px;">
-        <input type="text" id="item-search" onkeyup="filterItems()" placeholder="🔍 Search menu items..." style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;">
-      </div>
-
       <!-- Ice Cream & Sweets -->
       <div class="tile" onclick="addItem('1 Scoop', 10)">
         <img src="1 scoop.jpg" class="tile-img">
@@ -278,6 +273,11 @@
     </div>
 
     <div class="receipt-panel">
+      <!-- Search Bar Moved Here -->
+      <div class="no-print" style="margin-bottom: 12px;">
+        <input type="text" id="item-search" onkeyup="filterItems()" placeholder="🔍 Search menu items..." style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
+
       <!-- Table Selector Box -->
       <div class="table-section no-print">
         <label style="font-size: 13px; font-weight: bold; color: #555;">Select Table / Order Type:</label>
