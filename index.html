@@ -9,10 +9,11 @@
     body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background: #f4f4f9; }
     .app-container { display: flex; flex-direction: column; gap: 15px; }
     .menu-panel { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; }
-    .tile { flex: 1 1 calc(50% - 10px); min-height: 80px; background: #007aff; color: #fff; border-radius: 8px; text-align: center; cursor: pointer; padding: 15px 5px; }
+    .tile { flex: 1 1 calc(50% - 10px); min-height: 80px; background: #007aff; color: #fff; border-radius: 8px; text-align: center; cursor: pointer; padding: 10px 5px; }
     .tile:active { background: #0051a8; }
-    .tile-title { font-size: 16px; font-weight: bold; }
-    .tile-price { font-size: 14px; margin-top: 5px; }
+    .tile-img { width: 100%; height: 75px; object-fit: contain; background: rgba(0,0,0,0.15); border-radius: 6px; margin-bottom: 6px; }
+    .tile-title { font-size: 15px; font-weight: bold; }
+    .tile-price { font-size: 14px; margin-top: 3px; }
     .receipt-panel { background: #fff; border: 1px solid #ccc; padding: 15px; border-radius: 8px; width: 100%; }
     .receipt-list { list-style: none; padding: 0; margin: 10px 0; max-height: 220px; overflow-y: auto; border-bottom: 1px solid #eee; }
     .receipt-list li { padding: 8px 0; border-bottom: 1px solid #eee; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
@@ -45,220 +46,220 @@
 
       <!-- Ice Cream & Sweets -->
       <div class="tile" onclick="addItem('1 Scoop', 10)">
-        <img src="1 scoop.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="1 scoop.jpg" class="tile-img">
         <div class="tile-title">1 Scoop</div>
         <div class="tile-price">฿10</div>
       </div>
 
       <div class="tile" onclick="addItem('2 Scoops', 20)">
-        <img src="2 scoops.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="2 scoops.jpg" class="tile-img">
         <div class="tile-title">2 Scoops</div>
         <div class="tile-price">฿20</div>
       </div>
 
       <div class="tile" onclick="addItem('3 Scoops', 30)">
-        <img src="3 scoops.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="3 scoops.jpg" class="tile-img">
         <div class="tile-title">3 Scoops</div>
         <div class="tile-price">฿30</div>
       </div>
 
       <div class="tile" onclick="addItem('4 Scoops', 40)">
-        <img src="4 scoops.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="4 scoops.jpg" class="tile-img">
         <div class="tile-title">4 Scoops</div>
         <div class="tile-price">฿40</div>
       </div>
 
       <div class="tile" onclick="addItem('Waffle Cone', 10)">
-        <img src="waffle cone.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="waffle cone.jpg" class="tile-img">
         <div class="tile-title">Waffle Cone</div>
         <div class="tile-price">฿10</div>
       </div>
 
       <div class="tile" onclick="addItem('Milkshake', 60)">
-        <img src="milkshake.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="milkshake.jpg" class="tile-img">
         <div class="tile-title">Milkshake</div>
         <div class="tile-price">฿60</div>
       </div>
 
       <div class="tile" onclick="addItem('Ice Cream Toast', 39)">
-        <img src="ice cream on toast.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="ice cream on toast.jpg" class="tile-img">
         <div class="tile-title">Ice Cream Toast</div>
         <div class="tile-price">฿39</div>
       </div>
 
       <div class="tile" onclick="addItem('Milk Tart', 95)">
-        <img src="milktart.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="milktart.jpg" class="tile-img">
         <div class="tile-title">Milk Tart</div>
         <div class="tile-price">฿95</div>
       </div>
 
       <div class="tile" onclick="addItem('KoekSisters', 40)">
-        <img src="koeksisters.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="koeksisters.jpg" class="tile-img">
         <div class="tile-title">KoekSisters</div>
         <div class="tile-price">฿40</div>
       </div>
 
       <div class="tile" onclick="addItem('Ice Cream Waffle', 29)">
-        <img src="ice cream waffle.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="ice cream waffle.jpg" class="tile-img">
         <div class="tile-title">Ice Cream Waffle</div>
         <div class="tile-price">฿29</div>
       </div>
 
       <!-- Gaming Sessions -->
       <div class="tile" onclick="addItem('Adult Game 30 min', 55)">
-        <img src="adult gaming 30 minutes.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="adult gaming 30 minutes.jpg" class="tile-img">
         <div class="tile-title">Adult Game 30 min</div>
         <div class="tile-price">฿55</div>
       </div>
 
       <div class="tile" onclick="addItem('Adult Game 1 Hour', 89)">
-        <img src="adult gaming 1 hour.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="adult gaming 1 hour.jpg" class="tile-img">
         <div class="tile-title">Adult Game 1 Hour</div>
         <div class="tile-price">฿89</div>
       </div>
 
       <div class="tile" onclick="addItem('Student Game 30 min', 35)">
-        <img src="student gaming 30 minutes.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="student gaming 30 minutes.jpg" class="tile-img">
         <div class="tile-title">Student Game 30 min</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Student Game 1 Hour', 59)">
-        <img src="student gaming 1 hour.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="student gaming 1 hour.jpg" class="tile-img">
         <div class="tile-title">Student Game 1 Hour</div>
         <div class="tile-price">฿59</div>
       </div>
 
       <!-- Coffee & Beverages -->
       <div class="tile" onclick="addItem('Americano', 35)">
-        <img src="americano.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="americano.jpg" class="tile-img">
         <div class="tile-title">Americano</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Cappuccino', 40)">
-        <img src="cappuccino.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="cappuccino.jpg" class="tile-img">
         <div class="tile-title">Cappuccino</div>
         <div class="tile-price">฿40</div>
       </div>
 
       <div class="tile" onclick="addItem('Cocoa', 35)">
-        <img src="cocoa.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="cocoa.jpg" class="tile-img">
         <div class="tile-title">Cocoa</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Espresso', 40)">
-        <img src="espresso.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="espresso.jpg" class="tile-img">
         <div class="tile-title">Espresso</div>
         <div class="tile-price">฿40</div>
       </div>
 
       <div class="tile" onclick="addItem('Fresh Milk', 35)">
-        <img src="fresh milk.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="fresh milk.jpg" class="tile-img">
         <div class="tile-title">Fresh Milk</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Green Tea', 35)">
-        <img src="green tea.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="green tea.jpg" class="tile-img">
         <div class="tile-title">Green Tea</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Latte', 40)">
-        <img src="latte.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="latte.jpg" class="tile-img">
         <div class="tile-title">Latte</div>
         <div class="tile-price">฿40</div>
       </div>
 
       <div class="tile" onclick="addItem('Macchiato', 45)">
-        <img src="macchiato.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="macchiato.jpg" class="tile-img">
         <div class="tile-title">Macchiato</div>
         <div class="tile-price">฿45</div>
       </div>
 
       <div class="tile" onclick="addItem('Mocha', 45)">
-        <img src="mocha.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="mocha.jpg" class="tile-img">
         <div class="tile-title">Mocha</div>
         <div class="tile-price">฿45</div>
       </div>
 
       <div class="tile" onclick="addItem('Lychee Tea', 35)">
-        <img src="lychee tea.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="lychee tea.jpg" class="tile-img">
         <div class="tile-title">Lychee Tea</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Pink Milk', 35)">
-        <img src="pink milk.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="pink milk.jpg" class="tile-img">
         <div class="tile-title">Pink Milk</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Thai Lime Tea', 35)">
-        <img src="thai lime tea.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="thai lime tea.jpg" class="tile-img">
         <div class="tile-title">Thai Lime Tea</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Sparkling Soda', 35)">
-        <img src="sparkling soda.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="sparkling soda.jpg" class="tile-img">
         <div class="tile-title">Sparkling Soda</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Banana Milk', 35)">
-        <img src="banana milk.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="banana milk.jpg" class="tile-img">
         <div class="tile-title">Banana Milk</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <div class="tile" onclick="addItem('Thai Tea', 35)">
-        <img src="red thai tea.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="red thai tea.jpg" class="tile-img">
         <div class="tile-title">Thai Tea</div>
         <div class="tile-price">฿35</div>
       </div>
 
       <!-- Food -->
       <div class="tile" onclick="addItem('Toasted Steak Special', 159)">
-        <img src="toasted steak fries sandwich.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="toasted steak fries sandwich.jpg" class="tile-img">
         <div class="tile-title">Toasted Steak Special</div>
         <div class="tile-price">฿159</div>
       </div>
 
       <div class="tile" onclick="addItem('Spaghetti', 69)">
-        <img src="spaghetti.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="spaghetti.jpg" class="tile-img">
         <div class="tile-title">Spaghetti</div>
         <div class="tile-price">฿69</div>
       </div>
 
       <div class="tile" onclick="addItem('Pasta', 69)">
-        <img src="pasta.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="pasta.jpg" class="tile-img">
         <div class="tile-title">Pasta</div>
         <div class="tile-price">฿69</div>
       </div>
 
       <div class="tile" onclick="addItem('Dumpling', 69)">
-        <img src="dumpling.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="dumpling.jpg" class="tile-img">
         <div class="tile-title">Dumpling</div>
         <div class="tile-price">฿69</div>
       </div>
 
       <div class="tile" onclick="addItem('Chicken Wrap', 69)">
-        <img src="chicken wrap.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="chicken wrap.jpg" class="tile-img">
         <div class="tile-title">Chicken Wrap</div>
         <div class="tile-price">฿69</div>
       </div>
 
       <div class="tile" onclick="addItem('Chicken Roti', 69)">
-        <img src="chicken roti.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="chicken roti.jpg" class="tile-img">
         <div class="tile-title">Chicken Roti</div>
         <div class="tile-price">฿69</div>
       </div>
 
       <div class="tile" onclick="addItem('Plain Roti', 25)">
-        <img src="roti.jpg" style="width:100%; height:60px; object-fit:cover; border-radius:4px; margin-bottom:5px;">
+        <img src="roti.jpg" class="tile-img">
         <div class="tile-title">Plain Roti</div>
         <div class="tile-price">฿25</div>
       </div>
