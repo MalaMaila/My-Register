@@ -37,6 +37,10 @@
 
   <div class="app-container">
 <div class="menu-panel no-print">
+  <!-- Search Bar -->
+<div style="width: 100%; margin-bottom: 10px;">
+  <input type="text" id="item-search" onkeyup="filterItems()" placeholder="🔍 Search menu items..." style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;">
+</div>
 
   <!-- Ice Cream & Sweets -->
   <div class="tile" onclick="addItem('1 Scoop', 10)">
@@ -343,6 +347,23 @@
         document.getElementById('daily-total').innerText = '0.00';
       }
     }
+    function filterItems() {
+  var input = document.getElementById('item-search');
+  var filter = input.value.toLowerCase();
+  var tiles = document.getElementsByClassName('tile');
+
+  for (var i = 0; i < tiles.length; i++) {
+    var titleObj = tiles[i].getElementsByClassName('tile-title')[0];
+    if (titleObj) {
+      var txtValue = titleObj.textContent || titleObj.innerText;
+      if (txtValue.toLowerCase().indexOf(filter) > -1) {
+        tiles[i].style.display = "";
+      } else {
+        tiles[i].style.display = "none";
+      }
+    }
+  }
+}
   </script>
 </body>
 </html>
