@@ -260,10 +260,16 @@
 
     <div class="receipt-panel">
       <h3 style="margin-top:0;">Active Order</h3>
+      <!-- Order Date Selector -->
+  <div style="margin-bottom: 12px; background: #f8f9fa; padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+    <label style="font-size: 13px; font-weight: bold; color: #555; display: block; margin-bottom: 4px;">Sale Date:</label>
+    <input type="date" id="sale-date" readonly onclick="unlockDateChange()" style="width: 100%; padding: 6px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; cursor: pointer;">
+  </div>
       <ul id="receipt-list" class="receipt-list"></ul>
       <div class="total-box">Total: ฿<span id="current-total">0.00</span></div>
 
       <div class="no-print">
+      
         <button class="btn btn-checkout" onclick="completeSale()">Finalize Sale</button>
         <button class="btn btn-clear" onclick="clearReceipt()">Clear Order</button>
         <div class="daily-box">Today's Total: ฿<span id="daily-total">0.00</span></div>
@@ -331,7 +337,8 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
         items: itemsString, 
-        total: total 
+       total: total,
+        customDate: selectedDate
       })
     });
   }
@@ -364,6 +371,36 @@
     }
   }
 }
+    // Set your secret PIN for changing sale dates here
+  var DATE_PIN = "3232";
+
+  // Automatically sets the date box to today (Thailand time) when loaded
+  function initSaleDate() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var dateInput = document.getElementById('sale-date');
+    if (dateInput) {
+      dateInput.value = yyyy + '-' + mm + '-' + dd;
+    }
+  }
+
+  // Requires PIN to unlock the date input
+  function unlockDateChange() {
+    var dateInput = document.getElementById('sale-date');
+    if (dateInput.hasAttribute('readonly')) {
+      var enteredPin = prompt("Enter PIN to change the sale date:");
+      if (enteredPin === DATE_PIN) {
+        dateInput.removeAttribute('readonly');
+        alert("Date unlocked! Select the target date for this sale.");
+      } else if (enteredPin !== null) {
+        alert("Incorrect PIN! Date remains locked.");
+      }
+    }
+  }
+
+  window.addEventListener('load', initSaleDate);
   </script>
 </body>
 </html>
