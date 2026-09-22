@@ -467,8 +467,15 @@
       
       var total = 0;
       var selectedDate = document.getElementById('sale-date').value;
+      
+      // Get current local time string (e.g. "14:30:15")
+      var now = new Date();
+      var timeString = now.toTimeString().split(' ')[0];
+      
+      // Full ISO date-time string combining selected date with current time
+      var fullDateTime = selectedDate + " " + timeString;
 
-      // Build an array of individual items to send to Google Sheets
+      // Build array of items
       var itemsPayload = [];
       for (var i = 0; i < currentReceipt.length; i++) {
         total += currentReceipt[i].price;
@@ -476,7 +483,8 @@
           table: activeTable,
           name: currentReceipt[i].name,
           price: currentReceipt[i].price,
-          date: selectedDate
+          date: fullDateTime,
+          time: timeString
         });
       }
 
@@ -493,7 +501,7 @@
           body: JSON.stringify({ 
             orderItems: itemsPayload, 
             total: total,
-            customDate: selectedDate
+            customDate: fullDateTime
           })
         });
       }
