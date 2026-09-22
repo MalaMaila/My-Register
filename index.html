@@ -8,6 +8,7 @@
     * { box-sizing: border-box; }
     body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background: #f4f4f9; }
     .app-container { display: flex; flex-direction: column; gap: 15px; }
+    
     .menu-panel { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; }
     .tile { flex: 1 1 calc(50% - 10px); min-height: 80px; background: #007aff; color: #fff; border-radius: 8px; text-align: center; cursor: pointer; padding: 10px 5px; }
     .tile:active { background: #0051a8; }
@@ -37,8 +38,8 @@
 
     @media (min-width: 600px) {
       .app-container { flex-direction: row; }
-      .menu-panel { flex: 1.5; }
-      .receipt-panel { flex: 1; }
+      .receipt-panel { flex: 1; order: 1; }
+      .menu-panel { flex: 1.5; order: 2; }
       .tile { flex: 1 1 calc(33% - 10px); }
     }
     @media print {
@@ -50,6 +51,44 @@
 <body>
 
   <div class="app-container">
+    
+    <!-- Register / Control Panel First -->
+    <div class="receipt-panel">
+      <!-- 1. Table Selector Box -->
+      <div class="table-section no-print">
+        <label style="font-size: 13px; font-weight: bold; color: #555;">Select Table / Order Type:</label>
+        <div class="table-grid" id="table-grid">
+          <!-- Tables generated dynamically -->
+        </div>
+      </div>
+
+      <!-- 2. Search Bar Directly Above Items / Order -->
+      <div class="no-print" style="margin-bottom: 12px;">
+        <input type="text" id="item-search" onkeyup="filterItems()" placeholder="🔍 Search menu items..." style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px;">
+      </div>
+
+      <h3 style="margin-top:0;" id="order-title">Active Order: Takeaway</h3>
+      
+      <!-- Order Date Selector -->
+      <div style="margin-bottom: 12px; background: #f8f9fa; padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
+        <label style="font-size: 13px; font-weight: bold; color: #555; display: block; margin-bottom: 4px;">Sale Date:</label>
+        <input type="date" id="sale-date" readonly onclick="unlockDateChange()" style="width: 100%; padding: 6px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; cursor: pointer;">
+      </div>
+
+      <ul id="receipt-list" class="receipt-list"></ul>
+      <div class="total-box">Total: ฿<span id="current-total">0.00</span></div>
+
+      <!-- 3. Finalize & Order Controls -->
+      <div class="no-print">
+        <button class="btn btn-save" onclick="saveTableOrder()">Hold / Save Order to Table</button>
+        <button class="btn btn-checkout" onclick="completeSale()">Finalize & Pay</button>
+        <button class="btn btn-clear" onclick="clearReceipt()">Clear Order</button>
+        <div class="daily-box">Today's Total: ฿<span id="daily-total">0.00</span></div>
+        <button class="btn btn-clear" style="margin-top: 5px; background-color: #ff9500;" onclick="resetDailyTotal()">Reset Daily Total</button>
+      </div>
+    </div>
+
+    <!-- Menu Items Second -->
     <div class="menu-panel no-print">
       <!-- Ice Cream & Sweets -->
       <div class="tile" onclick="addItem('1 Scoop', 10)">
@@ -272,39 +311,6 @@
       </div>
     </div>
 
-    <div class="receipt-panel">
-      <!-- Search Bar Moved Here -->
-      <div class="no-print" style="margin-bottom: 12px;">
-        <input type="text" id="item-search" onkeyup="filterItems()" placeholder="🔍 Search menu items..." style="width: 100%; padding: 10px 12px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px;">
-      </div>
-
-      <!-- Table Selector Box -->
-      <div class="table-section no-print">
-        <label style="font-size: 13px; font-weight: bold; color: #555;">Select Table / Order Type:</label>
-        <div class="table-grid" id="table-grid">
-          <!-- Tables generated dynamically -->
-        </div>
-      </div>
-
-      <h3 style="margin-top:0;" id="order-title">Active Order: Takeaway</h3>
-      
-      <!-- Order Date Selector -->
-      <div style="margin-bottom: 12px; background: #f8f9fa; padding: 8px; border-radius: 6px; border: 1px solid #ddd;">
-        <label style="font-size: 13px; font-weight: bold; color: #555; display: block; margin-bottom: 4px;">Sale Date:</label>
-        <input type="date" id="sale-date" readonly onclick="unlockDateChange()" style="width: 100%; padding: 6px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; background-color: #fff; cursor: pointer;">
-      </div>
-
-      <ul id="receipt-list" class="receipt-list"></ul>
-      <div class="total-box">Total: ฿<span id="current-total">0.00</span></div>
-
-      <div class="no-print">
-        <button class="btn btn-save" onclick="saveTableOrder()">Hold / Save Order to Table</button>
-        <button class="btn btn-checkout" onclick="completeSale()">Finalize & Pay</button>
-        <button class="btn btn-clear" onclick="clearReceipt()">Clear Order</button>
-        <div class="daily-box">Today's Total: ฿<span id="daily-total">0.00</span></div>
-        <button class="btn btn-clear" style="margin-top: 5px; background-color: #ff9500;" onclick="resetDailyTotal()">Reset Daily Total</button>
-      </div>
-    </div>
   </div>
 
   <script>
